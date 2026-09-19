@@ -16,9 +16,16 @@ from fpdf import FPDF
 from dotenv import load_dotenv, set_key
 from openrouter import OpenRouter
 
-APP_DATA_DIR = os.path.expanduser(
-    "~/Library/Application Support/ProjectGen"
-)
+if os.name == "nt":
+    APP_DATA_DIR = os.path.join(
+        os.getenv("APPDATA", os.path.expanduser("~")),
+        "ProjectGen"
+    )
+else:
+    APP_DATA_DIR = os.path.expanduser(
+        "~/Library/Application Support/ProjectGen"
+    )
+
 os.makedirs(APP_DATA_DIR, exist_ok=True)
 
 ENV_FILE = os.path.join(APP_DATA_DIR, ".env")
@@ -1119,22 +1126,23 @@ class App:
         else:
             self._last_ideas = []
 
-    def set_dock_icon():
-        try:
+def set_dock_icon():
+    try:
+        if sys.platform == "darwin":
             from AppKit import NSApplication, NSImage
-            icon_path = resource_path("ProjectGen.icns")
-            app = NSApplication.sharedApplication()
-            image = NSImage.alloc().initWithContentsOfFile_(icon_path)
-            if image is not None:
-                app.setApplicationIconImage_(image)
-        except Exception:
-            import traceback
-            traceback.print_exc()
-    
-    def keep_dock_icon_fresh(root):
-    # Tk overwrites the dock icon with its own default at some point after launch (timing varies). Reassert ours periodically to compensate.
-        set_dock_icon()
-        root.after(2000, lambda: keep_dock_icon_fresh(root))
+        icon_path = resource_path("ProjectGen.icns")
+        app = NSApplication.sharedApplication()
+        image = NSImage.alloc().initWithContentsOfFile_(icon_path)
+        if image is not None:
+            app.setApplicationIconImage_(image)
+    except Exception:
+        import traceback
+        traceback.print_exc()
+
+def keep_dock_icon_fresh(root):
+# Tk overwrites the dock icon with its own default at some point after launch (timing varies). Reassert ours periodically to compensate.
+    set_dock_icon()
+    root.after(2000, lambda: keep_dock_icon_fresh(root))
 
 if __name__ == "__main__":
     root = tb.Window(themename="cosmo")
