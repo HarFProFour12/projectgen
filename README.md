@@ -210,7 +210,6 @@ The ProjectGen icon was designed specifically for the application.
 * Gemini
 * PyInstaller
 * GitHub Actions
-* UTM
 * PyObjC
 * ReportLab
 * VS Code
@@ -221,7 +220,7 @@ I used AI throughout the development of ProjectGen, mainly for:
 
 * Code debugging: Finding and fixing bugs and errors + getting help with Tkinter and ttkbootstrap.
 * Packaging: Getting help with PyInstaller issues and creating the macOS application.
-* Windows builds: Creating the GitHub Actions workflow used to build the Windows `.exe`.
+* Windows .exe: Creating the GitHub Actions workflow used to build the Windows `.exe`.
 * Icon issues: Debugging the macOS dock icon and using PyObjC to re-apply it.
 
 The actual project idea, design, UI, feature decisions, testing, and development were done by me.
