@@ -219,11 +219,8 @@ The ProjectGen icon was designed specifically for the application.
 
 I used AI throughout the development of ProjectGen, mainly for:
 
-* Code debugging: Finding and fixing bugs and errors.
-* Code development: Helping implement features and improve parts of the application.
-* UI development: Getting help with Tkinter and ttkbootstrap.
-* AI integration: Setting up the connection between ProjectGen and the AI model.
-* Packaging: Getting help with PyInstaller and creating the macOS application.
+* Code debugging: Finding and fixing bugs and errors + getting help with Tkinter and ttkbootstrap.
+* Packaging: Getting help with PyInstaller issues and creating the macOS application.
 * Windows builds: Creating the GitHub Actions workflow used to build the Windows `.exe`.
 * Icon issues: Debugging the macOS dock icon and using PyObjC to re-apply it.
 
