@@ -65,7 +65,7 @@ Each idea includes:
 * Estimated time
 * Difficulty
 
-![Generated Ideas](images/generated_ideas.png)
+![Generated Ideas](images/ideas.png)
 
 Once the ideas are shown, the suer can select one to get specific build instructions for it.
 
