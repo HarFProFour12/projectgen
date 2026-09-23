@@ -1,8 +1,8 @@
 # ProjectGen
 
-ProjectGen is an AI-powered project idea generator designed to help makers quickly come up with realistic project ideas based on the components, time, budget, and difficulty they have available.
+ProjectGen is an project idea generator powered by HackAI designed to help us tinkerers quickly come up with project ideas we can actually make, tailored to our specific needs, taking things like available components, time, budget, and difficulty level into account.
 
-Instead of spending ages trying to think of something to build, you can tell ProjectGen what you have, and it will generate several project ideas that fit your limitations.
+Instead of a lot of time trying to think of a project idea, you can tell ProjectGen what you have, and it will generate 5 project ideas that fit your requirements.
 
 ![ProjectGen](images/projectgen.png)
 
@@ -10,68 +10,68 @@ Instead of spending ages trying to think of something to build, you can tell Pro
 
 * AI project idea generation
 * Hardware and software project modes
-* Component input for hardware projects
-* Component drawer photo upload
-* Adjustable time and budget limits
+* Component input for hardware projects + photo upload feature
+* Adjustable time and budget
 * Difficulty level selection
 * Programming language selection for software projects
 * Detailed project descriptions
   * Estimated cost and build time
-  * Extra component suggestions
-  * AI-generated build guides
+  * Extra components section
+  * Detailed build guides
     * Hardware wiring instructions
-    * Copyable code
+    * Code + with button to copy it
     * PDF exporting
-* Session saving
-* API key storage
+* Previus session saving
 * macOS `.app` and Windows `.exe` versions
 
 ## Interface
 
-ProjectGen uses a simple interface powered by `tkinter` and `ttkbootstrap` where you can enter your project specifications and generate ideas.
+ProjectGen uses a simple GUI powered by `tkinter` and `ttkbootstrap` where you can enter your project specifications and generate project ideas.
 
-For hardware projects, you can enter the components you have available, or upload a photo of your components drawer instead.
+For hardware projects, you can enter the components you have, or upload a photo of your components drawer instead, to avoid the hassle of having to type each one of them out by hand.
 
 ![ProjectGen Main Screen](images/main_screen.png)
 
 You can choose between:
 
-* Hardware
-* Software
+* Hardware Project
+and
+* Software Project
 
-For hardware projects, you can also specify:
+For hardware projects, you must also write:
 
 * Components
 * Available time
 * Budget
-* Difficulty
+* Difficulty level
 
-For software projects, you can specify:
+For software projects, you must specify:
 
 * Programming language
 * Available time
-* Difficulty
+* Difficulty level
 
 ## Generated Ideas
 
-After generating ideas, ProjectGen displays multiple project cards containing information about each project.
+After generating ideas, the app displays multiple project cards with information about each project.
 
-Each idea includes:
+Each card has:
 
 * Project name
 * Description
 * Extra components
 * Estimated cost
 * Estimated time
-* Difficulty
+* Difficulty level
+* "Build this!" button
 
 ![Generated Ideas](images/ideas.png)
 
-Once the ideas are shown, the suer can select one to get specific build instructions for it.
+Once the ideas are shown, the suer can press the "Build this!" button to get specific instructions to build it.
 
 ## Build Guides
 
-ProjectGen can generate a complete build guide for the selected project.
+ProjectGen can generate a full build guide for the project.
 
 The guide contains:
 
@@ -79,15 +79,15 @@ The guide contains:
 * Components
 * Wiring (for hardware projects)
 * Step-by-step instructions
-* Code (when applicable)
+* Code (when is needed)
 
 ![Build Guide](images/build_guide.png)
 
 For hardware projects, the wiring section explains says the components should be connected.
 
-For software projects, the wiring section is not shown since it is not needed.
+For software projects, the wiring section is not shown, since it is not needed.
 
-The generated code can also be copied directly from the window using the "Copy code" button.
+The code can also be copied directly from the window, with the "Copy code" button.
 
 ## How It Works
 
