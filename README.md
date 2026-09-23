@@ -91,42 +91,23 @@ The code can also be copied directly from the window, with the "Copy code" butto
 
 ## How It Works
 
-ProjectGen is built with Python and uses an AI model through Hack Club AI, making thete request using OpenRouter.
+ProjectGen is built using Python and uses an AI model from Hack Club AI, making the request using OpenRouter.
 
-The user first enters the available components and project requirements. ProjectGen then sends this information to the AI model and asks it to generate project ideas that match those constraints.
+You first enter the components you have and the other project requirements. ProjectGen then sends this information to the AI model and asks it to generate project ideas that match these requirements.
 
-The AI returns the ideas in a structured JSON format, which ProjectGen then uses to create the project cards and build guides.
+The AI returns the ideas in a structured JSON format, which ProjectGen then uses to create the project cards and then the build guides.
 
-For hardware projects, ProjectGen can also use an uploaded image of the user's components to help determine what parts are available.
+For hardware projects, ProjectGen can also use an uploaded image of the user's component drawer, instead of manually typed components.
 
 ## AI
 
-ProjectGen currently uses Google's Gemini model through Hack Club AI, but that can be changed in the future to tailor to other needs.
+ProjectGen currently uses Google's "gemini-3.8-flash" model through Hack Club AI, mainly because it's fast, but that can be changed in the future to accomodate other needs.
 
-The application uses structured prompts so that the AI returns information in structured JSON. This makes it possible for ProjectGen to automatically display things such as cost, difficulty, components, wiring, and code in the correct sections of the interface, by converting the json into a python dictionary and accesing all the different variables seoerately.
-
-## Project Structure
-
-```text
-ProjectGen/
-├── main.py
-├── requirements.txt
-├── ProjectGen.spec
-├── ProjectGen-icon.png
-├── ProjectGen.icns
-├── ProjectGen.ico
-├── .gitignore
-├── .github/
-│   └── workflows/
-│       └── build-windows.yml
-└── ...
-```
-
-The main application is contained in `main.py`, while the GitHub Actions workflow is used to automatically build the Windows version of the application.
+The app uses specific prompts so that the AI returns information in structured JSON. This makes it possible for ProjectGen to automatically display things such as cost, difficulty, components, wiring, and code in the correct cards/sections of the UI, by converting the json into a python dictionary and accesing all the different variables seoerately.
 
 ## Building
 
-ProjectGen can be run directly from Python, or packaged into a standalone application using PyInstaller.
+ProjectGen can be run directly from Python, or packaged into a complete app using `PyInstaller`.
 
 ### Run from source
 
@@ -141,9 +122,9 @@ The macOS version is packaged using PyInstaller into a `.app` application.
 
 ### Windows
 
-Since I develop ProjectGen on macOS, I use GitHub Actions to build the Windows version remotely.
+Since I coded ProjectGen on macOS, I used GitHub Actions to build the Windows version remotely.
 
-The workflow:
+The workflow (written by AI):
 
 * Sets up a Windows environment
 * Installs the required Python packages
@@ -152,11 +133,11 @@ The workflow:
 * Creates a ZIP file containing the Windows build
 * Uploads it as a GitHub Actions artifact
 
-I also use a Windows VM in UTM to test the generated `.exe`.
+I then used a Windows VM in UTM to test the generated `.exe`.
 
 ## Current Status
 
-ProjectGen is currently in active development.
+ProjectGen is currently shipped.
 
 What I've done so far:
 
@@ -183,22 +164,22 @@ What I've done so far:
 * GitHub release
 * Windows VM testing
 
-I have left to do:
+More stuff I could do:
 
 * More testing
 * More UI improvements
 * More AI improvements
-* Additional features based on feedback
+* Additional features based on user feedback
 
 ## Design
 
-ProjectGen uses a simple interface designed to make the process of going from an idea to an actual project as quick as possible.
+ProjectGen uses a simple GUI designed to make the process of going from just a project idea to an actual finished product as fast as possible.
 
-The interface uses different sections and cards to separate the project requirements, generated ideas, and build guides.
+The interface uses different sections/cards to separate the project requirements, generated ideas, and build guides.
 
-The application was designed around the idea that you shouldn't need to already know exactly what you want to build. You can just enter what you have available and let ProjectGen come up with ideas.
+The app was designed around the idea that you don't need to already know exactly what you want to build. You can just enter what you have and let ProjectGen come up with the ideas.
 
-The ProjectGen icon was designed specifically for the application.
+The ProjectGen icon was designed specifically for the application, by first making a prototype in canva and then enhancing it using AI.
 
 ## Built With
 
@@ -222,6 +203,7 @@ I used AI throughout the development of ProjectGen, mainly for:
 * Packaging: Getting help with PyInstaller issues and creating the macOS application.
 * Windows .exe: Creating the GitHub Actions workflow used to build the Windows `.exe`.
 * Icon issues: Debugging the macOS dock icon and using PyObjC to re-apply it.
+* App icon: Enhancing the app icon prototype I designed in Canva.
 
 The actual project idea, design, UI, feature decisions, testing, and development were done by me.
 
