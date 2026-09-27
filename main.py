@@ -4,7 +4,7 @@ import json
 import sys
 
 import tkinter as tk
-from tkinter import messagebox, filedialog, simpledialog
+from tkinter import messagebox, filedialog
 import ttkbootstrap as tb
 from ttkbootstrap.constants import *
 
@@ -13,7 +13,7 @@ import mimetypes
 
 from fpdf import FPDF
 
-from dotenv import load_dotenv, set_key
+from dotenv import load_dotenv
 from openrouter import OpenRouter
 
 if os.name == "nt":
@@ -28,48 +28,13 @@ else:
 
 os.makedirs(APP_DATA_DIR, exist_ok=True)
 
-ENV_FILE = os.path.join(APP_DATA_DIR, ".env")
-
-load_dotenv(ENV_FILE)
-
-
 def resource_path(filename):
     if getattr(sys, "frozen", False):
         return os.path.join(sys._MEIPASS, filename)
     return os.path.join(os.path.dirname(os.path.abspath(__file__)), filename)
 
 def get_api_key():
-    api_key = os.getenv("HACKCLUB_API_KEY")
-
-    if api_key:
-        return api_key.strip()
-
-    temp_root = tk.Tk()
-    temp_root.withdraw()
-
-    api_key = simpledialog.askstring(
-        "HackClub AI API Key Required",
-        "No API key was found.\nPaste your HackClub AI API key below:",
-        show="*",
-        parent=temp_root
-    )
-
-    temp_root.destroy()
-
-    if not api_key or not api_key.strip():
-        messagebox.showerror("Missing API key", "ProjectGen needs a HackClub AI API key to work.")
-        raise SystemExit("No API key provided.")
-
-    api_key = api_key.strip()
-
-    set_key(
-        ENV_FILE,
-        "HACKCLUB_API_KEY",
-        api_key
-    )
-
-    os.environ["HACKCLUB_API_KEY"] = api_key
-    return api_key
+    return "sk-hc-v1-0ac8416fb3926787443a30e71551e2b6763fb2d02e281609593eed465bccd8c2"
 
 client = OpenRouter(
     api_key=get_api_key(),
