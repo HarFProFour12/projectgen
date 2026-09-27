@@ -5,11 +5,7 @@ a = Analysis(
     ['main.py'],
     pathex=[],
     binaries=[],
-    datas=[
-    ('DejaVuSans.ttf', '.'),
-    ('DejaVuSans-Bold.ttf', '.'),
-    ('ProjectGen.icns', '.'),
-],
+    datas=[('ProjectGen.icns', '.'), ('DejaVuSans.ttf', '.'), ('DejaVuSans-Bold.ttf', '.')],
     hiddenimports=[],
     hookspath=[],
     hooksconfig={},
