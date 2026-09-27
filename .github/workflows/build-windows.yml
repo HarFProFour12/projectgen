@@ -24,12 +24,12 @@ jobs:
 
       - name: Build ProjectGen
         run: |
-          pyinstaller --clean ProjectGen.spec
+          pyinstaller --clean ProjectGen-Windows.spec
 
       - name: Zip Windows app
         shell: pwsh
         run: |
-          Compress-Archive -Path "dist/ProjectGen/*" -DestinationPath "ProjectGen-Windows.zip"
+          Compress-Archive -Path "dist/ProjectGen.exe" -DestinationPath "ProjectGen-Windows.zip"
 
       - name: Upload Windows build
         uses: actions/upload-artifact@v4
