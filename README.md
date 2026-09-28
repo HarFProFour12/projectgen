@@ -207,5 +207,9 @@ I used AI throughout the development of ProjectGen, mainly for:
 
 The actual project idea, design, UI, feature decisions, testing, and development were done by me.
 
+---
+### Created for Hack Club’s Stardance.
+This project was created as part of Hack Club Stardance, a Hack Club event encouraging young people to build and ship their own projects.
+
 --- 
 **Made by Harry Fanouriakis**
