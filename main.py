@@ -4,7 +4,7 @@ import json
 import sys
 
 import tkinter as tk
-from tkinter import messagebox, filedialog
+from tkinter import messagebox, filedialog, simpledialog
 import ttkbootstrap as tb
 from ttkbootstrap.constants import *
 
@@ -13,7 +13,7 @@ import mimetypes
 
 from fpdf import FPDF
 
-from dotenv import load_dotenv
+from dotenv import load_dotenv, set_key
 from openrouter import OpenRouter
 
 if os.name == "nt":
@@ -21,20 +21,66 @@ if os.name == "nt":
         os.getenv("APPDATA", os.path.expanduser("~")),
         "ProjectGen"
     )
-else:
+elif sys.platform == "darwin":
     APP_DATA_DIR = os.path.expanduser(
         "~/Library/Application Support/ProjectGen"
     )
+else:
+    APP_DATA_DIR = os.path.join(
+        os.getenv("XDG_DATA_HOME", os.path.expanduser("~/.local/share")),
+        "ProjectGen"
+    )
 
 os.makedirs(APP_DATA_DIR, exist_ok=True)
+
+ENV_FILE = os.path.join(APP_DATA_DIR, ".env")
+load_dotenv(ENV_FILE, override=False)
 
 def resource_path(filename):
     if getattr(sys, "frozen", False):
         return os.path.join(sys._MEIPASS, filename)
     return os.path.join(os.path.dirname(os.path.abspath(__file__)), filename)
 
+
 def get_api_key():
-    return "sk-hc-v1-0ac8416fb3926787443a30e71551e2b6763fb2d02e281609593eed465bccd8c2"
+    api_key = os.getenv("HACKCLUB_API_KEY", "").strip()
+
+    if api_key:
+        return api_key
+
+    temp_root = tk.Tk()
+    temp_root.withdraw()
+
+    try:
+        api_key = simpledialog.askstring(
+            "HackClub AI API Key Required",
+            "No API key was found.\nPaste your HackClub AI API key below:",
+            show="*",
+            parent=temp_root
+        )
+
+        if not api_key or not api_key.strip():
+            messagebox.showerror(
+                "Missing API key",
+                "ProjectGen needs a HackClub AI API key to work.",
+                parent=temp_root
+            )
+            raise SystemExit("No API key provided.")
+
+        api_key = api_key.strip()
+        set_key(ENV_FILE, "HACKCLUB_API_KEY", api_key)
+
+        if os.name != "nt":
+            try:
+                os.chmod(ENV_FILE, 0o600)
+            except OSError:
+                pass
+
+        os.environ["HACKCLUB_API_KEY"] = api_key
+        return api_key
+
+    finally:
+        temp_root.destroy()
 
 client = OpenRouter(
     api_key=get_api_key(),
@@ -652,11 +698,12 @@ class App:
         self.progress.start(10)
 
         prompt = build_prompt(components, hours, budget, difficulty, project_type)
+        image_path = self.image_path
 
         def worker():
             try:
                 if self.image_path:
-                    ideas = call_ai_image(prompt, self.image_path)
+                    ideas = call_ai_image(prompt, image_path)
                 else:
                     ideas = call_ai(prompt)
                     

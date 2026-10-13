@@ -1,8 +1,12 @@
+
+.env
+.venv/
+venv/
+__pycache__/
+*.pyc
+
 build/
 dist/
-.venv/
-*.pyc
-__pycache__/
+*.spec.bak
+
 .DS_Store
-projectgen_session.json
-.env

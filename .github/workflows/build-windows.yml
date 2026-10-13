@@ -1,3 +1,4 @@
+
 name: Build Windows App
 
 on:
@@ -14,7 +15,7 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
-          python-version: "3.14"
+          python-version: "3.12"
 
       - name: Install dependencies
         run: |
@@ -24,15 +25,26 @@ jobs:
 
       - name: Build ProjectGen
         run: |
-          pyinstaller --clean ProjectGen-Windows.spec
+          pyinstaller --clean --noconfirm ProjectGen-Windows.spec
+
+      - name: Check build output
+        shell: pwsh
+        run: |
+          if (!(Test-Path "dist/ProjectGen.exe")) {
+            Write-Error "dist/ProjectGen.exe was not found. Check ProjectGen-Windows.spec."
+          }
 
       - name: Zip Windows app
         shell: pwsh
         run: |
-          Compress-Archive -Path "dist/ProjectGen.exe" -DestinationPath "ProjectGen-Windows.zip"
+          Compress-Archive `
+            -Path "dist/ProjectGen.exe" `
+            -DestinationPath "ProjectGen-Windows.zip" `
+            -Force
 
       - name: Upload Windows build
         uses: actions/upload-artifact@v4
         with:
           name: ProjectGen-Windows
           path: ProjectGen-Windows.zip
+          if-no-files-found: error
